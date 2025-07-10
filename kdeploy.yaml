@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bsvk38-eta-deploy
+  name: insurence-eta-app-deploy
   labels:
-    app: bsvk38-eta-deploy-lbl
+    app: insurence-eta-app-deploy-lbl
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: bsvk38-eta-app
+      app: insurence-eta-app
   template:
     metadata:
       labels:
-        app: bsvk38-eta-app
+        app: insurence-eta-app
     spec:
       containers:
-      - name: bsvk38-eta-container
+      - name: insurence-eta-container
         image: bsvk38/insurence-eta-app:latest
         ports:
         - containerPort: 8080
@@ -23,15 +23,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bsvk38-eta-np-service
+  name: insurence-eta-np-service
   labels:
-    app: bsvk38-eta-app
+    app: insurence-eta-app
 spec:
   selector:
-    app: bsvk38-eta-deploy-lbl
+    app: insurence-eta-deploy-lbl
 
   type: NodePort
   ports:
   - nodePort: 31030
     port: 8080
-    targetPort: 8080
+    targetPort: 8083
